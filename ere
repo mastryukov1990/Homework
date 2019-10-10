@@ -1,0 +1,40 @@
+from tkinter import *
+from random import randrange as rnd, choice
+import time
+root = Tk()
+root.geometry('800x600')
+
+canv = Canvas(root,bg='white')
+canv.pack(fill=BOTH,expand=1)
+
+colors = ['red','orange','yellow','green','blue']
+
+def new_ball():
+
+    global x, y ,r
+    x = rnd(100,700)
+    y = rnd(100,500)
+    r = rnd(30,50)
+    canv.create_oval(x-r, y-r, x+r, y+r, fill = choice(colors), width = 0, tag = "miach" )
+    root.after(2000, new_ball())
+
+def click(event):
+    print()
+    if((event.x - x)**2 + (event.y - y)**2 < r**2):
+        global i
+        i = i + 1
+        canv.delete('miach')
+        new_ball()
+        print (i)
+new_ball()
+for c in range (2) :
+    canv.move('miach', x + 10 * c, y + 10 * c)
+global i
+i = 0
+canv.bind('<Button-1>', click)
+l = Label(bg = 'black', fg='white', width=200)
+l.pack()
+mainloop()
+~                                                                                                                                                                                                                                            
+~                                                                                                                                                                                                                                            
+~                         
